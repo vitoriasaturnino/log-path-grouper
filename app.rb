@@ -1,5 +1,6 @@
 require 'httparty'
 require 'json'
+require 'fileutils'
 
 # Classe que rastreia a contagem de erros e sucessos por caminho de URL em um arquivo de log.
 class PathTracker
@@ -15,6 +16,8 @@ class PathTracker
     puts "\n #{'-' * 4} Output of Logs Grouped by Path #{'-' * 4}"
     puts "\n#{JSON.pretty_generate(result)}"
     puts "\n #{'-' * 40}"
+
+    save_output_to_file(JSON.pretty_generate(result))
   end
 
   # Retorna uma matriz de strings contendo os logs lidos do arquivo de log na URL fornecida.
@@ -59,6 +62,13 @@ class PathTracker
   # Formata o resultado da contagem de logs em uma matriz de hashes, cada um representando uma contagem por caminho de URL.
   def format_result(log_count)
     log_count.values
+  end
+
+  # Salva o conteúdo de `output` em um arquivo JSON formatado em ~/sre-intern-test/output.json
+  def save_output_to_file(output)
+    output_path = File.expand_path('sre-intern-test/output.json')
+    FileUtils.mkdir_p(File.dirname(output_path))
+    File.write(output_path, JSON.pretty_generate(output))
   end
 end
 

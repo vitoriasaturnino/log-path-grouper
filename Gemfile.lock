@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    fileutils (1.6.0)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
+    json (2.6.3)
+    mini_mime (1.1.2)
+    multi_xml (0.6.0)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  fileutils
+  httparty
+  json
+
+BUNDLED WITH
+   2.4.6
