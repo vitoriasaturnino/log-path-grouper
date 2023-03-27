@@ -3,11 +3,11 @@ require 'json'
 require 'fileutils'
 
 # Classe que rastreia a contagem de erros e sucessos por caminho de URL em um arquivo de log.
-class PathTracker
+class LogPathGrouper
   # URL do arquivo de log a ser lido.
   LOG_URL = 'https://s3.amazonaws.com/gupy5/production/companies/41683/emails/1679436955729/2c36bc50-c810-11ed-9aa6-a37a97984945/log.txt'.freeze
 
-  # Inicializa um novo objeto PathTracker, lê os logs do arquivo de log e imprime a contagem formatada de erros e sucessos por caminho de URL.
+  # Inicializa um novo objeto LogPathGrouper, lê os logs do arquivo de log e imprime a contagem formatada de erros e sucessos por caminho de URL.
   def initialize
     logs = get_logs(LOG_URL)
     log_count = count_logs(logs)
@@ -72,4 +72,4 @@ class PathTracker
   end
 end
 
-PathTracker.new
+LogPathGrouper.new
