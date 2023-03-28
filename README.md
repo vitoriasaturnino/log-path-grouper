@@ -14,30 +14,22 @@ Parses given log files and bundles the outputs by paths that responded successfu
 
 ## Prerequisites
 
-- Docker
+- Docker >= 20.10.20
+- Ruby >= 3.1.2 (to run tests)
 
 #
 
 ## Setup</h2>
 
-- Clone the repository:
+- Grant execute permission to run.sh file `$ sudo chmod +x run.sh`
+- Run the file with the command `$ ./run.sh`
 
-  ```
-    $ git clone https://github.com/vitoriasaturnino/log-path-grouper.git
-    $ cd log-path-grouper
-  ```
+#
 
-- Grant execute permission to run.sh file:
+## Running Tests
 
-  ```
-    $ sudo chmod +x run.sh
-  ```
-
-- Run the file with the command:
-
-  ```
-    $ ./run.sh
-  ```
+- Install dependencies `$ bundle install`
+- To run tests `$ rspec tests/app_spec.rb`
 
 #
 
