@@ -9,6 +9,7 @@ Parses given log files and bundles the outputs by paths that responded successfu
 ![Ruby](https://img.shields.io/badge/ruby-%23CC342D.svg?style=for-the-badge&logo=ruby&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
+[![Ruby](https://github.com/vitoriasaturnino/log-path-grouper/actions/workflows/ruby.yml/badge.svg?branch=main)](https://github.com/vitoriasaturnino/log-path-grouper/actions/workflows/ruby.yml)
 
 #
 
