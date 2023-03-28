@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
+require 'fileutils'
 require 'httparty'
 require 'json'
-require 'fileutils'
 
 # Classe que rastreia a contagem de erros e sucessos por caminho de URL em um arquivo de log.
 class LogPathGrouper
   # URL do arquivo de log a ser lido.
-  LOG_URL = 'https://s3.amazonaws.com/gupy5/production/companies/41683/emails/1679436955729/2c36bc50-c810-11ed-9aa6-a37a97984945/log.txt'.freeze
+  LOG_URL = 'https://s3.amazonaws.com/gupy5/production/companies/41683/emails/1679436955729/2c36bc50-c810-11ed-9aa6-a37a97984945/log.txt'
 
-  # Inicializa um novo objeto LogPathGrouper, lê os logs do arquivo de log e imprime a contagem formatada de erros e sucessos por caminho de URL.
+  # Inicializa um novo objeto LogPathGrouper, lê os logs, imprime a contagem formatada de erros e sucessos.
   def initialize
     logs = get_logs(LOG_URL)
     log_count = count_logs(logs)
@@ -30,7 +32,8 @@ class LogPathGrouper
     []
   end
 
-  # Lida com a resposta HTTP da solicitação GET e retorna o corpo da resposta se o código de status estiver na faixa de 200 a 399.
+  # Lida com a resposta HTTP da solicitação GET e retorna o corpo da resposta se o código de status estiver
+  # na faixa de 200 a 399.
   # Caso contrário, lança uma exceção com a mensagem de erro correspondente.
   def handle_response(response)
     case response.code
@@ -59,7 +62,7 @@ class LogPathGrouper
     JSON.parse(log.tr("'", '\"'))
   end
 
-  # Formata o resultado da contagem de logs em uma matriz de hashes, cada um representando uma contagem por caminho de URL.
+  # Formata o resultado da contagem de logs em uma matriz de hashes, cada um representa a contagem por caminho de URL.
   def format_result(log_count)
     log_count.values
   end

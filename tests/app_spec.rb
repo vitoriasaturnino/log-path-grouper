@@ -1,7 +1,10 @@
-require 'rspec'
-require_relative '../app'
+# frozen_string_literal: true
+
 require 'fileutils'
 require 'json'
+require 'rspec'
+
+require_relative '../app'
 
 describe LogPathGrouper do
   let(:test_logs_url) { 'tests/test_logs.txt' }
