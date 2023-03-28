@@ -69,64 +69,66 @@ describe LogPathGrouper do
     it 'returns a hash of log counts by path' do
       expect(subject).to eq(
         {
-          "/" => {:error_count=>243, :path=>"/", :success_count=>1},
-          "/api/path3" => {:error_count=>250, :path=>"/api/path3", :success_count=>2},
-          "/path1" => {:error_count=>248, :path=>"/path1", :success_count=>0},
-          "/path2" => {:error_count=>255, :path=>"/path2", :success_count=>1},
+          '/' => { error_count: 243, path: '/', success_count: 1 },
+          '/api/path3' => { error_count: 250, path: '/api/path3', success_count: 2 },
+          '/path1' => { error_count: 248, path: '/path1', success_count: 0 },
+          '/path2' => { error_count: 255, path: '/path2', success_count: 1 }
         }
       )
     end
   end
 
   describe '#parse_log' do
-    let(:log) { '{"env": "prod", "path": "/", "method": "DELETE", "duration": "163", "statusCode": "469", "statusMessage": "status message 2", "host": "queroteste.com", "level": "LEVEL 1", "message": "message 3", "timestamp": "1679339588.557135"}' }
+    let(:log) do
+      '{"env": "prod", "path": "/", "method": "DELETE", "duration": "163", "statusCode": "469", "statusMessage": "status message 2", "host": "queroteste.com", "level": "LEVEL 1", "message": "message 3", "timestamp": "1679339588.557135"}'
+    end
 
     subject { described_class.new.parse_log(log) }
 
     it 'returns a hash with "path" and "statusCode" keys' do
       expect(subject).to eq(
         {
-          "duration" => "163",
-          "env" => "prod",
-          "host" => "queroteste.com",
-          "level" => "LEVEL 1",
-          "message" => "message 3",
-          "method" => "DELETE",
-          "path" => "/",
-          "statusCode" => "469",
-          "statusMessage" => "status message 2",
-          "timestamp" => "1679339588.557135",
+          'duration' => '163',
+          'env' => 'prod',
+          'host' => 'queroteste.com',
+          'level' => 'LEVEL 1',
+          'message' => 'message 3',
+          'method' => 'DELETE',
+          'path' => '/',
+          'statusCode' => '469',
+          'statusMessage' => 'status message 2',
+          'timestamp' => '1679339588.557135'
         }
       )
     end
   end
 
   describe '#format_result' do
-    let(:log_count) {
+    let(:log_count) do
       {
-        "/" => { path: "/", error_count: 0, success_count: 0 },
-        "/path1" => { path: "/path1", error_count: 0, success_count: 0 },
-        "/path2" => { path: "/path2", error_count: 0, success_count: 0 },
-        "/api/path3" => { path: "/api/path3", error_count: 0, success_count: 0 }
+        '/' => { path: '/', error_count: 0, success_count: 0 },
+        '/path1' => { path: '/path1', error_count: 0, success_count: 0 },
+        '/path2' => { path: '/path2', error_count: 0, success_count: 0 },
+        '/api/path3' => { path: '/api/path3', error_count: 0, success_count: 0 }
       }
-    }
+    end
 
     subject { described_class.new.format_result(log_count) }
 
     it 'returns an array of hashes representing the count for each URL path' do
       expect(subject).to eq(
         [
-          { path: "/", error_count: 0, success_count: 0 },
-          { path: "/path1", error_count: 0, success_count: 0 },
-          { path: "/path2", error_count: 0, success_count: 0 },
-          { path: "/api/path3", error_count: 0, success_count: 0 }
+          { path: '/', error_count: 0, success_count: 0 },
+          { path: '/path1', error_count: 0, success_count: 0 },
+          { path: '/path2', error_count: 0, success_count: 0 },
+          { path: '/api/path3', error_count: 0, success_count: 0 }
         ]
       )
     end
   end
 
   describe '#save_output_to_file' do
-    let(:output) { JSON.pretty_generate([{ path: "/", error_count: 0, success_count: 0 }]) }
+    let(:output) { JSON.pretty_generate([{ path: '/', error_count: 0, success_count: 0 }]) }
     subject { described_class.new.save_output_to_file(output) }
 
     it 'saves the output to a JSON file at the specified path' do
